@@ -30,7 +30,7 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Carrito", systemImage: "cart")
                 }
-                .badge(cartManager.totalItems > 0 ? cartManager.totalItems : nil)
+                .badge(cartManager.totalItems > 0 ? cartManager.totalItems : 0)
         }
     }
 }

@@ -53,14 +53,30 @@ struct ProductRow: View {
     
     var body: some View {
         HStack(spacing: 16) {
-            AsyncImage(url: URL(string: product.image)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+            AsyncImage(url: URL(string: product.image)) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(width: 80, height: 80)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 80, height: 80)
+                case .failure(let error):
+                    VStack {
+                        Image(systemName: "exclamationmark.triangle")
+                            .foregroundColor(.red)
+                        Text("Error: \(error.localizedDescription)")
+                            .font(.caption)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.red)
+                    }
                     .frame(width: 80, height: 80)
-            } placeholder: {
-                ProgressView()
-                    .frame(width: 80, height: 80)
+                @unknown default:
+                    ProgressView()
+                        .frame(width: 80, height: 80)
+                }
             }
             
             VStack(alignment: .leading, spacing: 4) {
