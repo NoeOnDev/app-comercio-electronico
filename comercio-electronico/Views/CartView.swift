@@ -22,14 +22,15 @@ struct CartView: View {
                         VStack(spacing: 20) {
                             ForEach(Array(cartManager.items.keys), id: \.id) { product in
                                 HStack {
-                                    AsyncImage(url: URL(string: product.image)) { image in
-                                        image
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
+                                    // Reemplazar AsyncImage con un icono
+                                    ZStack {
+                                        Circle()
+                                            .fill(Color(.systemGray5))
                                             .frame(width: 60, height: 60)
-                                    } placeholder: {
-                                        ProgressView()
-                                            .frame(width: 60, height: 60)
+                                        
+                                        Image(systemName: "cart.fill")
+                                            .font(.system(size: 24))
+                                            .foregroundColor(.blue)
                                     }
                                     .padding(.trailing, 8)
                                     

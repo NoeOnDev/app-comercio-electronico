@@ -18,14 +18,22 @@ struct ProductDetailView: View {
                     .padding()
             } else if let product = product {
                 VStack(alignment: .leading, spacing: 16) {
-                    AsyncImage(url: URL(string: product.image)) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(maxHeight: 300)
-                    } placeholder: {
-                        ProgressView()
-                            .frame(height: 300)
+                    // Reemplazar AsyncImage con un elemento visual estático
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(.systemGray6))
+                            .frame(height: 200)
+                        
+                        VStack {
+                            Image(systemName: "bag")
+                                .font(.system(size: 60))
+                                .foregroundColor(.blue)
+                            
+                            Text(product.category)
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                                .padding(.top, 4)
+                        }
                     }
                     .padding()
                     
